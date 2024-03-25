@@ -1,6 +1,7 @@
 
 package com.example.racetracker.ui
 
+import android.graphics.ColorFilter
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -101,6 +103,13 @@ private fun RaceTrackerScreen(
                 painter = painterResource(R.drawable.ic_walk),
                 contentDescription = null,
                 modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
+                tint = Color.Blue,
+            )
+            Icon(
+                painter = painterResource(R.drawable.ic_walk2),
+                contentDescription = null,
+                modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
+                tint = Color.Red,
             )
             StatusIndicator(
                 participantName = playerOne.name,
