@@ -1,4 +1,3 @@
-
 package com.example.racetracker.ui
 
 import android.util.Log
@@ -7,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.delay
 import kotlin.coroutines.cancellation.CancellationException
-
 
 class RaceParticipant(
     val name: String,
@@ -21,9 +19,9 @@ class RaceParticipant(
         require(progressIncrement > 0) { "progressIncrement=$progressIncrement; must be > 0" }
     }
 
-
     var currentProgress by mutableStateOf(initialProgress)
         private set
+
     suspend fun run() {
         try {
             while (currentProgress < maxProgress) {
@@ -35,6 +33,7 @@ class RaceParticipant(
             throw e // Always re-throw CancellationException.
         }
     }
+
     fun reset() {
         currentProgress = 0
     }

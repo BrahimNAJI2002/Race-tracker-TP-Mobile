@@ -1,7 +1,7 @@
 
 package com.example.racetracker.ui
 
-import android.graphics.ColorFilter
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,9 +10,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -22,13 +26,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.racetracker.R
 import com.example.racetracker.ui.theme.RaceTrackerTheme
 import kotlinx.coroutines.coroutineScope
@@ -74,7 +73,6 @@ fun RaceTrackerApp() {
             .padding(horizontal = dimensionResource(R.dimen.padding_medium)),
     )
 }
-
 @Composable
 private fun RaceTrackerScreen(
     playerOne: RaceParticipant,
@@ -97,20 +95,19 @@ private fun RaceTrackerScreen(
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_small)),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start
         ) {
-            Icon(
-                painter = painterResource(R.drawable.ic_walk),
-                contentDescription = null,
-                modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
-                tint = Color.Blue,
-            )
-            Icon(
-                painter = painterResource(R.drawable.ic_walk2),
-                contentDescription = null,
-                modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
-                tint = Color.Red,
-            )
+                RaceIconWithPlayer(
+                    player = playerOne,
+                    iconResId = R.drawable.ic_walk,
+                    tint = Color.Blue
+                )
+                RaceIconWithPlayer(
+                    player = playerTwo,
+                    iconResId = R.drawable.ic_walk2,
+                    tint = Color.Red
+                )
+            }
             StatusIndicator(
                 participantName = playerOne.name,
                 currentProgress = playerOne.currentProgress,
@@ -143,9 +140,32 @@ private fun RaceTrackerScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
             )
-        }
+
     }
 }
+
+@Composable
+private fun RaceIconWithPlayer(
+    player: RaceParticipant,
+    iconResId: Int,
+    tint: Color
+) {
+    val iconModifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
+    var position by remember { mutableStateOf(0.dp) }
+    LaunchedEffect(player.currentProgress) {
+        position = (player.currentProgress * 2).dp
+    }
+
+    Box(modifier = Modifier.offset(x = position)) {
+        Icon(
+            painter = painterResource(iconResId),
+            contentDescription = null,
+            modifier = iconModifier,
+            tint = tint,
+        )
+    }
+}
+
 
 @Composable
 private fun StatusIndicator(

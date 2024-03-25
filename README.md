@@ -20,9 +20,16 @@ Le backend de l'application Race Tracker gère la logique derrière la simulatio
 
 - **Icônes des Joueurs :** Les icônes des joueurs ont été doublées avec des couleurs différentes pour les distinguer plus facilement. Maintenant, le joueur 1 est représenté par une icône rouge, tandis que le joueur 2 est représenté par une icône bleue.
 
+<img src="imgs/3.png" alt="Implémentation Backend" width="50%" height="50%">
+
+## Backend pour les Icônes
+
+Les icônes des joueurs sont désormais gérées par un backend dédié. Cela permet d'avoir une meilleure gestion des ressources et de garantir la cohérence des icônes utilisées dans l'application.
+
+Pour plus de détails sur l'implémentation du backend des icônes, veuillez consulter le code source du projet.
+
 ### Vidéo de démonstration
 
-<video width="320" height="240" controls>
-  <source src="https://github.com/BrahimNAJI2002/Race-tracker-TP-Mobile/raw/main/3.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+[Regarder la vidéo de démonstration sur YouTube](https://youtu.be/q6woQijFY0E)
+
